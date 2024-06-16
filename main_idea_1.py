@@ -26,7 +26,7 @@ def sequence_data1(path):
     # 使用列表推导生成划分后的列表
     DATA1 = [Data1[i:i + n] for i in range(0, len(Data1)-1024, 10)]    #将 Data1 中的数据按照长度为 n 的滑动窗口进行切片，并存储在列表 DATA1 中。
                                                            #Data1[i:i + n] 表示从 Data1 中取索引从 i 开始、长度为 n 的子列表
-                                                           #range(0, len(Data1)-1024, 10) 则表示从索引 0 开始，以步长为 10 逐渐增加直至 len(Data1)-1024（即 Data1 的长度减去 1024）
+                                                           #range(0, len(Data1)-1024, 50) 则表示从索引 0 开始，以步长为 50 逐渐增加直至 len(Data1)-1024（即 Data1 的长度减去 1024）
     # print(DATA1[1])
     return DATA1
 #打标签
@@ -422,45 +422,45 @@ print('0.01时测试的虚警和准确率分别为：', a1 / clutter, b1 / targe
 print('%.3f, %.4f,%.2f, %.4f' %(c_a/cl, c_b/ct, c_a1/cl, c_b1/ct))
 print('%.3f, %.4f,%.2f, %.4f' %(a/clutter, b/target,a1/clutter, b1/target))
 
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-from matplotlib import colors
+# import numpy as np
+# import matplotlib.pyplot as plt
+# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+# from matplotlib import colors
 
 
-# 绘制混淆矩阵
-# 绘制混淆矩阵
-test_pred = np.argmax(test_acc, axis=1)
-test_true = np.argmax(test_y, axis=1)
+# # 绘制混淆矩阵
+# # 绘制混淆矩阵
+# test_pred = np.argmax(test_acc, axis=1)
+# test_true = np.argmax(test_y, axis=1)
 
-cm = confusion_matrix(test_true, test_pred)
+# cm = confusion_matrix(test_true, test_pred)
 
-# 创建自定义颜色映射，使对角线颜色一致
-cmap = colors.ListedColormap(['#FF9999', '#99FF99'])
-bounds = [0, cm.max()/2, cm.max()]
-norm = colors.BoundaryNorm(bounds, cmap.N)
+# # 创建自定义颜色映射，使对角线颜色一致
+# cmap = colors.ListedColormap(['#FF9999', '#99FF99'])
+# bounds = [0, cm.max()/2, cm.max()]
+# norm = colors.BoundaryNorm(bounds, cmap.N)
 
-fig, ax = plt.subplots()
-im = ax.imshow(cm, interpolation='nearest', cmap=cmap, norm=norm)
+# fig, ax = plt.subplots()
+# im = ax.imshow(cm, interpolation='nearest', cmap=cmap, norm=norm)
 
-# 添加颜色条
-cbar = ax.figure.colorbar(im, ax=ax)
-cbar.ax.set_ylabel('Counts', rotation=-90, va="bottom")
+# # 添加颜色条
+# cbar = ax.figure.colorbar(im, ax=ax)
+# cbar.ax.set_ylabel('Counts', rotation=-90, va="bottom")
 
-# 在矩阵上标注数字
-thresh = cm.max() / 2.
-for i in range(cm.shape[0]):
-    for j in range(cm.shape[1]):
-        ax.text(j, i, format(cm[i, j], 'd'),
-                ha="center", va="center",
-                color="white" if cm[i, j] > thresh else "black")
+# # 在矩阵上标注数字
+# thresh = cm.max() / 2.
+# for i in range(cm.shape[0]):
+#     for j in range(cm.shape[1]):
+#         ax.text(j, i, format(cm[i, j], 'd'),
+#                 ha="center", va="center",
+#                 color="white" if cm[i, j] > thresh else "black")
 
-# 设置标签和标题
-ax.set(xticks=np.arange(cm.shape[1]),
-       yticks=np.arange(cm.shape[0]),
-       xticklabels=['Clutter', 'Target'], yticklabels=['Clutter', 'Target'],
-       title='Confusion Matrix',
-       ylabel='True label',
-       xlabel='Predicted label')
+# # 设置标签和标题
+# ax.set(xticks=np.arange(cm.shape[1]),
+#        yticks=np.arange(cm.shape[0]),
+#        xticklabels=['Clutter', 'Target'], yticklabels=['Clutter', 'Target'],
+#        title='Confusion Matrix',
+#        ylabel='True label',
+#        xlabel='Predicted label')
 
-plt.show()
+# plt.show()
